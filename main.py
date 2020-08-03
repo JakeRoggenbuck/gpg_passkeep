@@ -40,7 +40,7 @@ def write_pass():
         "title": message_info["title"],
         "desc": message_info["desc"],
     }
-    sha = hashlib.sha1(
+    sha = hashlib.sha256(
         (mysave["title"]).encode()
     ).hexdigest()
     mysave["sha"] = sha
