@@ -85,10 +85,10 @@ def delete_pass(_hash):
 
 def parse():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-s")
-    parser.add_argument("-r")
-    parser.add_argument("-d")
-    parser.add_argument("-w", action='store_true')
+    parser.add_argument("-s", help="Search phrase")
+    parser.add_argument("-r", help="Read hash")
+    parser.add_argument("-d", help="Delete hash")
+    parser.add_argument("-w", help="Write", action='store_true')
     args = parser.parse_args()
     return args
 
