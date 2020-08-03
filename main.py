@@ -69,10 +69,25 @@ def read_pass(_hash):
             print(check)
 
 
+def delete_pass(_hash):
+    for x in data["entries"]:
+        if _hash == x["sha"]:
+            title = x["title"]
+            data["entries"].remove(x)
+            with open('pass.json', 'w') as fp:
+                json.dump(data, fp)
+            shred = input(f"Shred {title}.asc [Y/n]: ")
+            if shred.upper() == "Y":
+                subprocess.run([
+                    f"shred -u {title}.asc"],
+                    shell=True)
+
+
 def parse():
     parser = argparse.ArgumentParser()
     parser.add_argument("-s")
     parser.add_argument("-r")
+    parser.add_argument("-d")
     parser.add_argument("-w", action='store_true')
     args = parser.parse_args()
     return args
@@ -84,5 +99,7 @@ if __name__ == "__main__":
         search_pass(command.s)
     elif command.r is not None:
         read_pass(command.r)
+    elif command.d is not None:
+        delete_pass(command.d)
     elif command.w:
         write_pass()
